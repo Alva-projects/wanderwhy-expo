@@ -53,9 +53,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "600",
-    textAlign: "center",
+    textAlign: "left",
+    fontFamily: "Montserrat_600SemiBold",
   },
   buttonWrapper: {
     width: "100%",

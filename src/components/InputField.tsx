@@ -46,54 +46,34 @@ const InputField = ({
 };
 
 const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: "transparent",
-    borderRadius: 40,
-    fontFamily: "System", // Ändra till din font
-    fontSize: 16,
-    color: "black",
-    backgroundColor: "white",
-  },
-  inputShort: {
-    width: 310,
-    height: 48,
-    paddingHorizontal: 16,
-    textAlign: "center",
-  },
-  inputLong: {
-    width: "100%",
-    height: 150,
-    borderRadius: 15,
-    padding: 12,
-    textAlignVertical: "top",
-  },
   characterCounter: {
-    fontSize: 12,
-    color: "#666",
+    fontSize: 13,
+    color: "#3C3C4399",
     marginTop: 5,
     textAlign: "right",
+    fontFamily: "Montserrat_400Regular",
   },
   container: {
     marginVertical: 10,
   },
   input: {
+    alignSelf: "center",
     borderRadius: 40,
     borderWidth: 1,
     borderColor: "#8B5CF6",
     color: "black",
     fontSize: 16,
-    fontFamily: "System", // Lägg till font
-    paddingHorizontal: 16,
-    paddingVertical: 10,
+    fontFamily: "System",
+    backgroundColor: "white",
+    width: 354,
   },
   inputShort: {
     width: 310,
     height: 48,
     textAlign: "center",
+    fontWeight: 600,
   },
   inputLong: {
-    width: "100%",
     maxWidth: "100%",
     height: 150,
     borderRadius: 12,

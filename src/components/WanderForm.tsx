@@ -34,19 +34,21 @@ const WanderForm = () => {
 const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
-    paddingHorizontal: 20,
+    paddingHorizontal: 0,
   },
   title: {
-    fontSize: 20,
+    fontSize: 32,
     fontWeight: "600",
     marginBottom: 20,
     textAlign: "center",
+    fontFamily: "Poppins_600SemiBold",
   },
   descriptionSection: {
     marginTop: 20,
   },
   descriptionLabel: {
-    fontSize: 16,
+    fontFamily: "Poppins_400Regular",
+    fontSize: 14,
     marginBottom: 8,
     textAlign: "left",
   },

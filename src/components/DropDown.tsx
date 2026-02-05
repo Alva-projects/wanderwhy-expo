@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -5,14 +6,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 const DropDown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("");
 
-  const animation = useRef(new Animated.Value(0)).current; // 0 = stängd, 1 = öppen
+  const animation = useRef(new Animated.Value(0)).current;
 
   const categories = [
     "Category 0",
@@ -22,23 +23,20 @@ const DropDown = () => {
     "Category 4",
   ];
 
-  // Animera height och pilrotation
   useEffect(() => {
     Animated.timing(animation, {
       toValue: isOpen ? 1 : 0,
       duration: 300,
       easing: Easing.out(Easing.ease),
-      useNativeDriver: false, // höjd går inte med native driver
+      useNativeDriver: false,
     }).start();
   }, [isOpen]);
 
-  // Interpolera höjd (0 → max höjd baserat på antal items)
   const height = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, categories.length * 50], // 50px per item
+    outputRange: [0, categories.length * 52],
   });
 
-  // Pilrotation
   const rotate = animation.interpolate({
     inputRange: [0, 1],
     outputRange: ["0deg", "180deg"],
@@ -50,41 +48,58 @@ const DropDown = () => {
   };
 
   return (
-    <View style={styles.dropdown}>
-      <TouchableOpacity
-        style={styles.header}
-        onPress={() => setIsOpen(!isOpen)}
-      >
-        <Text style={styles.headerText}>{category || "Categories"}</Text>
-        <Animated.Image
-          source={require("../../assets/images/chevron-down.png")}
-          style={[styles.arrow, { transform: [{ rotate }] }]}
-        />
-      </TouchableOpacity>
+    <LinearGradient
+      colors={["#8B5CF6", "#A591EF"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.gradientBorder}
+    >
+      <View style={styles.dropdown}>
+        <TouchableOpacity
+          style={styles.header}
+          onPress={() => setIsOpen(!isOpen)}
+        >
+          <Text style={styles.headerText}>{category || "Categories"}</Text>
+          <Animated.Image
+            source={require("../../assets/images/chevron-down.png")}
+            style={[styles.arrow, { transform: [{ rotate }] }]}
+          />
+        </TouchableOpacity>
 
-      <Animated.View style={[styles.list, { height }]}>
-        {categories.map((cat, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.listItem}
-            onPress={() => handleSelect(cat)}
-          >
-            <Text style={styles.listItemText}>{cat}</Text>
-          </TouchableOpacity>
-        ))}
-      </Animated.View>
-    </View>
+        <Animated.View style={[styles.list, { height }]}>
+          {categories.map((cat, index) => (
+            <View key={index} style={styles.listItemWrapper}>
+              <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => handleSelect(cat)}
+              >
+                <Text style={styles.listItemText}>{cat}</Text>
+              </TouchableOpacity>
+
+              <LinearGradient
+                colors={["#60588B", "#9B8EC4"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.itemBorder}
+              />
+            </View>
+          ))}
+        </Animated.View>
+      </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  dropdown: {
-    borderWidth: 1,
-    borderColor: "#8B5CF6",
+  gradientBorder: {
     borderRadius: 10,
-    backgroundColor: "white",
-    overflow: "hidden", // viktigt för smooth animation
     marginVertical: 10,
+  },
+  dropdown: {
+    backgroundColor: "white",
+    borderRadius: 9,
+    margin: 1,
+    overflow: "hidden",
   },
   header: {
     flexDirection: "row",
@@ -103,12 +118,19 @@ const styles = StyleSheet.create({
   list: {
     overflow: "hidden",
   },
+  listItemWrapper: {
+    marginHorizontal: 10,
+  },
   listItem: {
     height: 50,
     justifyContent: "center",
     paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    backgroundColor: "white",
+  },
+  itemBorder: {
+    height: 1,
+    borderRadius: 1,
+    marginVertical: 1,
   },
   listItemText: {
     fontSize: 14,
